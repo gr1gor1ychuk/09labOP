@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <string.h> 
+
+struct tabl
+{
+char surname[100]; char name[100]; int numb;
+};
+
+int main() {
+
+    struct tabl arr[10]; double average = 0; int n = 10;
+
+    printf(" \n");
+    printf("Enter 10 numbers, surnames and names:\n");
+    printf(" \n");
+    printf("Number\tSurname\t Name\n");
+
+        for (int i = 0; i < n; i++)
+            {
+            scanf("%d%s%s", &arr[i].numb, arr[i].name, arr[i].surname); average += 
+            strlen(arr[i].name);
+            }
+
+    average = average/10;
+    for (int i2 = n - 1; i2 > 0; i2--)
+    { for (int i = 0; i < i2; i++)
+        {
+        if (strcmp(arr[i].surname, arr[i + 1].surname) > 0) { struct tabl xyz;
+        xyz = arr[i]; arr[i] = arr[i + 1]; arr[i + 1] = xyz;
+        }
+        else if (strcmp(arr[i].surname, arr[i + 1].surname) == 0)
+            {
+            if (strcmp(arr[i].name, arr[i + 1].name) > 0)
+            { struct tabl xyz; 
+            arr[i] = arr[i + 1]; arr[i + 1] = xyz;
+            }
+            }
+        }
+    }
+
+    int lich = 1;
+    for (int i = 0; i < n - 1; i++)
+    {
+    if (strcmp(arr[i].surname, arr[i + 1].surname) != 0) lich++;
+    }
+
+    printf("\n Average surname length = %lf\n", average);
+    printf("\n Amount of different names = %d\n", lich);
+    printf("\nSorted list\nNumber\t        Name\t        Surname\n");
+    for (int i = 0; i < n; i++)
+    {
+    printf("%d\t\t%s\t\t%s\n", arr[i].numb , arr[i].surname, arr[i].name);
+    }
+}

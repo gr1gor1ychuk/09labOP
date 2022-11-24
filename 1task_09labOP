@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+
+int main ()
+{
+    char arr[100], dict[100][30];
+    printf(" \n");
+    printf("Enter your sentence: ");
+
+ for(int i=0; i<100; i++)
+ {
+    for(int j=0; j<100; j++)
+        dict[i][j]='\0';
+ }
+
+fgets(arr, 100, stdin);
+int index =0, pos =-1; 
+for(int i =strlen(arr)-2; i>=0; i--)
+{
+ if(arr[i]==' ')
+ {
+ index++;
+ pos =-1;
+ }
+ else
+ {
+ pos++;
+ dict[index][pos]=arr[i];
+ }
+}
+for(;index>=0;index--)
+    printf("%s\n", dict[index]);
+    printf(" \n");
+return 0;
+}

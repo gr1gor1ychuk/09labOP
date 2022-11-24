@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<stdbool.h>
+#include<ctype.h>
+
+int main()
+{
+    printf(" \n");
+    printf("Enter your email: ");
+
+    char str[100];
+    fgets(str, 100, stdin);
+    bool valid = true;
+    int presents = 0;
+
+    for(int i = 0; str[i]!='\n'; i++)
+        {
+            if(!isalpha(str[i])&&!isdigit(str[i])&&str[i]!='-'&&str[i]!='_'&&str[i]!='.'&&str[i]!='@')
+            {
+            valid = false;
+            break;
+            }
+
+            if(i >0&&str[i]=='.'&&str[i -1]=='.')
+            {
+            valid =false;
+            break;
+            }
+
+            else if(i >0&&str[i]=='@'&&!presents)
+            {
+            presents =1;
+            }
+
+            else if(str[i]=='@'&&presents)
+            {
+            valid =false;
+            break;
+            }
+            else if((isalpha(str[i])||isdigit(str[i]))&&presents ==1)
+            {
+            presents =2;
+        
+            }
+            else if(str[i]=='.'&&presents ==2)
+            {
+            presents =3;
+            }
+            else if(isalpha(str[i])&&presents ==3&&str[i +1]=='\n')
+            {
+            presents =4;
+            }
+        }
+
+        if(valid &&presents ==4)
+        {
+        printf("Your email is vaild.\n");
+        }
+        else 
+        printf("Your email is not valid.\n");
+
+    return 0; 
+}
